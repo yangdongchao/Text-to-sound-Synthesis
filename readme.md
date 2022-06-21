@@ -1,5 +1,5 @@
 # Text-to-sound Synthesis
-This is the open source code for our paper "Text-to-sound Synthesis". We will release all of the code, pre-trained models afther the paper is accepted.
+This is the open source code for our paper "Diffsound: discrete diffusion model for text-to-sound generateion". We will release all of the code, pre-trained models as soon as possible.
 
 ## Overview
 
