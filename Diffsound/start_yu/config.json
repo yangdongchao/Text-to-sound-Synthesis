@@ -1,0 +1,15 @@
+{
+    "Token":"vOwUVHKwR__zYB3t5tBleQ",
+    "business_flag": "TEG_AILAB_TRC_CGC",
+    "mount_ceph_business_flag":"TEG_AILAB_TRC_CGC_INTERN",
+    "model_local_file_path": "/apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast/start_yu",
+    "GPUName": "P40",
+    "task_flag": "jwyu_diffusion_caps_vgg_pre_load_5",
+    "host_num": 2,
+    "host_gpu_num": 8,
+    "cuda_version": "11.0",
+    "image_full_name": "mirrors.tencent.com/donchaoyang/tts:diffusion2",
+    "exec_start_in_all_mpi_pods": true,
+    "is_elasticity": false,
+    "keep_live": true
+}

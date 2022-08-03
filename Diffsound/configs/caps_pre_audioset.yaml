@@ -1,0 +1,169 @@
+# change from o4
+model:
+  target: sound_synthesis.modeling.models.dalle_spec.DALLE
+  params:
+    content_info: {key: image}
+    condition_info: {key: text}
+    content_codec_config: 
+      target: sound_synthesis.modeling.codecs.spec_codec.vqgan.VQModel
+      params:
+        ckpt_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-04-24T23-17-27_audioset_codebook256/checkpoints/last.ckpt' # e.g. '2021-06-06T19-42-53_vas_specs_vqgan' or '2021-05-19T22-16-54_vggsound_specs_vqgan'
+        embed_dim: 256
+        n_embed: 256 # codebook 的大小，若使用vggsound训练的codebook,则应该为1024
+        ddconfig:
+          double_z: false
+          z_channels: 256
+          resolution: 848 # we need not to crop
+          in_channels: 1
+          out_ch: 1
+          ch: 128
+          ch_mult: [1, 1, 2, 2, 4]
+          num_res_blocks: 2
+          attn_resolutions: [53]
+          dropout: 0.0
+        lossconfig:
+          target: specvqgan.modules.losses.DummyLoss
+    first_stage_permuter_config:
+      target: specvqgan.modules.transformer.permuter.ColumnMajor
+      params:
+        H: 5  # mel_num, num of feats in specs / down_factor
+        W: 53  # cropped spec length / down_factor
+    condition_codec_config:
+      target: sound_synthesis.modeling.codecs.text_codec.tokenize.Tokenize
+      params:
+       context_length: 77     ############# 77 for clip and 256 for dalle
+       add_start_and_end: True
+       with_mask: True
+       pad_value: 0 # 0 for clip embedding and -100 for others
+       clip_embedding: False     ############################   if we use clip embedding 
+       tokenizer_config:
+        target: sound_synthesis.modeling.modules.clip.simple_tokenizer.SimpleTokenizer   #########
+        params:
+          end_idx: 49152                              ###################
+    diffusion_config:      
+    # target: image_synthesis.modeling.transformers.gpt_like_transformer.GPTLikeTransformer
+      target: sound_synthesis.modeling.transformers.diffusion_transformer.DiffusionTransformer
+      params:
+        diffusion_step: 100
+        alpha_init_type: 'alpha1'       # init_type = fix or cos or linear 
+        auxiliary_loss_weight: 5.0e-4
+        adaptive_auxiliary_loss: True
+        mask_weight: [1, 1]    # the loss weight on mask region and non-mask region
+
+        transformer_config:
+          target: sound_synthesis.modeling.transformers.transformer_utils.Text2ImageTransformer
+          params:
+            attn_type: 'selfcross'
+            n_layer: 19
+            condition_seq_len: 77    ###### 77 for clip and 256 for dalle
+            content_seq_len: 265  # 5 x 53
+            content_spatial_size: [5, 53]
+            n_embd: 1024 # the dim of embedding dims
+            condition_dim: 512
+            n_head: 16 
+            attn_pdrop: 0.0
+            resid_pdrop: 0.0
+            block_activate: GELU2
+            timestep_type: 'adalayernorm'    # adainsnorm or adalayernorm and abs
+            mlp_hidden_times: 4
+        condition_emb_config:
+          target: sound_synthesis.modeling.embeddings.clip_text_embedding.CLIPTextEmbedding
+          params:
+            clip_name: 'ViT-B/32'
+            num_embed: 49408 # 49152+256
+            normalize: True
+            pick_last_embedding: False   # if True same as clip but we need embedding of each word
+            keep_seq_len_dim: False
+            additional_last_embedding: False
+            embed_dim: 512
+        content_emb_config:
+          target: sound_synthesis.modeling.embeddings.dalle_mask_image_embedding.DalleMaskImageEmbedding
+          params:
+            num_embed: 256    #should be quantize_number
+            spatial_size: !!python/tuple [5, 53]
+            embed_dim: 1024 # the dim of postion embedding
+            trainable: True
+            pos_emb_type: embedding
+
+solver:
+  base_lr: 2.0e-6 # I reduce it from 3.0e-6 to 2.0e-6
+  adjust_lr: none # not adjust lr according to total batch_size
+  max_epochs: 400
+  save_epochs: 100
+  validation_epochs: 400
+  sample_iterations: epoch  # epoch #30000      # how many iterations to perform sampling once ?
+  print_specific_things: True
+  load_path: /apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast/OUTPUT/pretrain/000099e_132799iter.pth
+  # config for ema
+  ema:
+    decay: 0.99
+    update_interval: 25
+    device: cpu
+
+  clip_grad_norm:
+    target: sound_synthesis.engine.clip_grad_norm.ClipGradNorm
+    params:
+      start_iteration: 0
+      end_iteration: 5000
+      max_norm: 0.5
+  optimizers_and_schedulers: # a list of configures, so we can config several optimizers and schedulers
+  - name: none # default is None
+    optimizer:
+      target: torch.optim.AdamW
+      params: 
+        betas: !!python/tuple [0.9, 0.96]
+        weight_decay: 4.5e-2
+            # target: ZeroRedundancyOptimizer
+            # optimizer_class: torch.optim.AdamW
+            # params:
+            # betas: !!python/tuple [0.9, 0.96]
+            # weight_decay: 4.5e-2
+    scheduler:
+      step_iteration: 1
+      target: sound_synthesis.engine.lr_scheduler.ReduceLROnPlateauWithWarmup
+      params:
+        factor: 0.5
+        patience: 25000
+        min_lr: 1.0e-6
+        threshold: 1.0e-1
+        threshold_mode: rel
+        warmup_lr: 4.5e-4 # the lr to be touched after warmup
+        warmup: 1000 
+
+dataloader:
+  # data_root: data
+  data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audiocaps
+  split_json: /apdcephfs/share_1316500/donchaoyang/data/audiocaps/split_8gpu_json
+  buffer_size: 4
+  batch_nums: 96
+  chunk_num_per_gpu: 4
+  batch_size: 16 #20
+  num_workers: 12
+  train_datasets: # a list of configures, so we can combine several schedulers
+    - target: sound_synthesis.data.caps_dataset.CapsDataset
+      params:
+        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audiocaps
+        phase: train
+        mel_num: 80
+        spec_len: 860
+        spec_crop_len: 848
+        random_crop: False
+        im_preprocessor_config:
+          target: sound_synthesis.data.utils.image_preprocessor.DalleTransformerPreprocessor   # ImageNet
+          params:
+            size: 256
+            phase: train
+  validation_datasets:
+    - target: sound_synthesis.data.caps_dataset.CapsDataset
+      params:
+        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audiocaps
+        phase: test
+        mel_num: 80
+        spec_len: 860
+        spec_crop_len: 848
+        random_crop: False
+        im_preprocessor_config:
+          target: sound_synthesis.data.utils.image_preprocessor.DalleTransformerPreprocessor
+          params:
+            size: 256
+            phase: val

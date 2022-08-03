@@ -1,0 +1,33 @@
+dataloader:
+  # data_root: data
+  data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audiocaps
+  batch_size: 16
+  num_workers: 8
+  train_datasets: # a list of configures, so we can combine several schedulers
+    - target: sound_synthesis.data.caps_dataset.CapsDataset
+      params:
+        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audiocaps
+        phase: train
+        mel_num: 80
+        spec_len: 860
+        spec_crop_len: 848
+        random_crop: False
+        im_preprocessor_config:
+          target: sound_synthesis.data.utils.image_preprocessor.DalleTransformerPreprocessor   # ImageNet
+          params:
+            size: 256
+            phase: train
+  validation_datasets:
+    - target: sound_synthesis.data.caps_dataset.CapsDataset
+      params:
+        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audiocaps
+        phase: test
+        mel_num: 80
+        spec_len: 860
+        spec_crop_len: 848
+        random_crop: False
+        im_preprocessor_config:
+          target: sound_synthesis.data.utils.image_preprocessor.DalleTransformerPreprocessor
+          params:
+            size: 256
+            phase: val
