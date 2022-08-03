@@ -10,7 +10,7 @@ python /apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast/running_command/
 ```
 #### Training on audiocaps
 ```
-python /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/running_command/run_train_caps.py
+python /apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast/running_command/run_train_caps.py
 ```
 #### Sampling
 ```
