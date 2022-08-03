@@ -1,0 +1,1 @@
+python3 train_vggish_audioset.py /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/specvqgan/modules/losses/vggishish/configs/vggish_audio.yaml

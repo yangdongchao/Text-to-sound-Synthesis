@@ -1,0 +1,41 @@
+mode: 'eval'  # 'eval'
+
+wav:
+  sr: 22050 
+  window_length: 1024
+  hop_length: 256
+  n_mels: 80
+
+encoder:
+  model: 'audioset'  # 'deit'
+  freeze: No
+  pretrained: No
+
+decoder:
+  nhead: 8
+  nhid: 512
+  nlayers: 4
+  dropout: 0.2
+  dim_feedforward: 2048
+  activation: 'gelu'
+
+word_embedding:
+  pretrained: Yes 
+  freeze: No 
+
+data:
+  batch_size: 18
+  num_workers: 8
+
+training:
+  label_smoothing: Yes
+  epochs: 30
+  lr: !!float 1e-4
+  clip_grad: 2
+  seed: 20
+
+path:
+  vocabulary: 'data/pickles/words_list.p'
+  encoder: 'pretrained_models/audioset_deit.pth'  # 'pretrained_models/deit.pth'
+  word2vec: 'pretrained_models/word2vec/w2v_512.model'
+  eval_model: '/apdcephfs/share_1316500/donchaoyang/code3/ACT/outputs/exp_4/model/best_model.pth'

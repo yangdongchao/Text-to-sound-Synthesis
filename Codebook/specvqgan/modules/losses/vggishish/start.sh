@@ -1,0 +1,3 @@
+#python3 train_vggish_v.py /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/specvqgan/modules/losses/vggishish/configs/vggish_m.yaml
+python3 train_vggish_m.py /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/specvqgan/modules/losses/vggishish/configs/vggish_m.yaml
+#python3 train_melception_m.py /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/specvqgan/modules/losses/vggishish/configs/melception.yaml

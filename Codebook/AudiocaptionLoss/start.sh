@@ -1,0 +1,2 @@
+#python3 train.py -n exp_4_1
+python3 eval.py -n exp_uniform09_299_fast3 -s /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-02-09T00-13-01_caps_transformer/samples_2022-02-10T10-02-37/caps_validation/cls_0/

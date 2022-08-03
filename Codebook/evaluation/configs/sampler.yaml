@@ -1,0 +1,11 @@
+sampler:
+  splits: ['validation']  # vggsound: ['train', 'validation', 'test'], vas: ['train', 'validation']
+  batch_size: 96
+  num_workers: 4
+  temperature: 1.0
+  sample_next_tok_from_pred_dist: True
+  top_k: 100
+  sampling_mode: 'nopix'  # nopix or half (given half of the encoded groundtruth tokens)
+  samples_per_video: 1
+  model_logdir: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-05-05T19-28-48_caps_transformer' #'Please specify path to log directory e.g. ./logs/your_experiment'
+  no_condition: True

@@ -1,0 +1,1 @@
+The more details about how to use BERT to extract text features, please refer to https://github.com/lonePatient/Bert-Multi-Label-Text-Classification
