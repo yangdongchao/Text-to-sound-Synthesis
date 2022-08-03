@@ -19,6 +19,7 @@ https://github.com/XinhaoMei/ACT
 https://github.com/cientgu/VQ-Diffusion
 https://github.com/CompVis/taming-transformers
 https://github.com/lonePatient/Bert-Multi-Label-Text-Classification
+https://github.com/v-iashin/SpecVQGAN
 ## Cite 
 @article{yang2022diffsound,
   title={Diffsound: Discrete Diffusion Model for Text-to-sound Generation},
