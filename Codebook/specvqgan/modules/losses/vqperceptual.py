@@ -359,37 +359,6 @@ class VQLPAPSWithDiscriminator(nn.Module):
             return d_loss, log
 
 
-class VQLPAPSWithDiscriminator1dFeats(VQLPAPSWithDiscriminator):
-    def __init__(self, disc_start, codebook_weight=1.0, pixelloss_weight=1.0,
-                 disc_num_layers=3, disc_in_channels=3, disc_factor=1.0, disc_weight=1.0,
-                 perceptual_weight=1.0, use_actnorm=False, disc_conditional=False,
-                 disc_ndf=64, disc_loss="hinge", min_adapt_weight=0.0, max_adapt_weight=1e4):
-        super().__init__(disc_start=disc_start, codebook_weight=codebook_weight,
-                         pixelloss_weight=pixelloss_weight, disc_num_layers=disc_num_layers,
-                         disc_in_channels=disc_in_channels, disc_factor=disc_factor, disc_weight=disc_weight,
-                         perceptual_weight=perceptual_weight, use_actnorm=use_actnorm,
-                         disc_conditional=disc_conditional, disc_ndf=disc_ndf, disc_loss=disc_loss,
-                         min_adapt_weight=min_adapt_weight, max_adapt_weight=max_adapt_weight)
-
-        self.discriminator = NLayerDiscriminator1dFeats(input_nc=disc_in_channels, n_layers=disc_num_layers,
-                                                   use_actnorm=use_actnorm, ndf=disc_ndf).apply(weights_init)
-
-class VQLPAPSWithDiscriminator1dSpecs(VQLPAPSWithDiscriminator):
-    def __init__(self, disc_start, codebook_weight=1.0, pixelloss_weight=1.0,
-                 disc_num_layers=3, disc_in_channels=3, disc_factor=1.0, disc_weight=1.0,
-                 perceptual_weight=1.0, use_actnorm=False, disc_conditional=False,
-                 disc_ndf=64, disc_loss="hinge", min_adapt_weight=0.0, max_adapt_weight=1e4):
-        super().__init__(disc_start=disc_start, codebook_weight=codebook_weight,
-                         pixelloss_weight=pixelloss_weight, disc_num_layers=disc_num_layers,
-                         disc_in_channels=disc_in_channels, disc_factor=disc_factor, disc_weight=disc_weight,
-                         perceptual_weight=perceptual_weight, use_actnorm=use_actnorm,
-                         disc_conditional=disc_conditional, disc_ndf=disc_ndf, disc_loss=disc_loss,
-                         min_adapt_weight=min_adapt_weight, max_adapt_weight=max_adapt_weight)
-
-        self.discriminator = NLayerDiscriminator1dSpecs(input_nc=disc_in_channels, n_layers=disc_num_layers,
-                                                   use_actnorm=use_actnorm, ndf=disc_ndf).apply(weights_init)
-
-
 if __name__ == '__main__':
     from specvqgan.modules.diffusionmodules.model import Decoder, Decoder1d
 

@@ -1,3 +1,4 @@
+# form https://github.com/v-iashin/SpecVQGAN
 import sys
 
 import pytorch_lightning as pl

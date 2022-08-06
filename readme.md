@@ -1,6 +1,8 @@
 # Text-to-sound Generation
 This is the open source code for our paper "Diffsound: discrete diffusion model for text-to-sound generateion". <br/>
-**2022/08/03** We upload the training code of VQ-VAE and the baseline method of text-to-sound generation (Autoregressive model), and the Diffsound code. Considering that the github has the limitation of file size, we will upload the pre-trained model on google drive desk. <br/>
+**2022/08/03** We upload the training code of VQ-VAE and the baseline method of text-to-sound generation (Autoregressive model), and the Diffsound code. Considering that the github has the limitation of file size, we will upload the pre-trained model on google drive disk. <br/>
+**2022/08/06** We uppoad the pre-trained model on google drive. please refer to https://drive.google.com/drive/folders/193It90mEBDPoyLghn4kFzkugbkF_aC8v?usp=sharing <br/>
+Note that a pre-trained diffsound model is very large, so that we only upload one audioset pretrained model now. More models we will try to upload on other free disk, if you known any free shared disk, please let me know, I will very appreciate.
 More details will be updated as soon as.
 ## Overview
 ![avatar](fig/overview.png)

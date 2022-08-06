@@ -1,6 +1,5 @@
 """
     Based on https://github.com/CompVis/taming-transformers/blob/52720829/taming/modules/losses/lpips.py
-    Adapted for spectrograms by Vladimir Iashin (v-iashin)
 """
 from collections import namedtuple
 from collections import OrderedDict

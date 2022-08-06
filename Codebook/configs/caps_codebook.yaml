@@ -17,7 +17,7 @@ model: # the parameter of model
       dropout: 0.0
 
     lossconfig:
-      target: specvqgan.modules.losses.vqperceptual.VQLPAPSWithDiscriminator
+      target: specvqgan.modules.losses.vqperceptual.VQLPAPSWithDiscriminator_without_per
       params:
         disc_conditional: False
         disc_in_channels: 1
