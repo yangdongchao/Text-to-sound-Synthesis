@@ -16,10 +16,10 @@ import torchvision
 from PIL import Image
 import soundfile
 sys.path.insert(0,'/apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast')
-from image_synthesis.utils.io import load_yaml_config
-from image_synthesis.modeling.build import build_model
-from image_synthesis.data.build import build_dataloader
-from image_synthesis.utils.misc import get_model_parameters_info
+from sound_synthesis.utils.io import load_yaml_config
+from sound_synthesis.modeling.build import build_model
+from sound_synthesis.data.build import build_dataloader
+from sound_synthesis.utils.misc import get_model_parameters_info
 import datetime
 from pathlib import Path
 from vocoder.modules import Generator
