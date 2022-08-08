@@ -1,4 +1,3 @@
-# change from o4
 model:
   target: sound_synthesis.modeling.models.dalle_spec.DALLE
   params:
@@ -41,7 +40,6 @@ model:
         params:
           end_idx: 49152                              ###################
     diffusion_config:      
-    # target: image_synthesis.modeling.transformers.gpt_like_transformer.GPTLikeTransformer
       target: sound_synthesis.modeling.transformers.diffusion_transformer.DiffusionTransformer
       params:
         diffusion_step: 100
@@ -84,86 +82,3 @@ model:
             embed_dim: 1024 # the dim of postion embedding
             trainable: True
             pos_emb_type: embedding
-
-solver:
-  base_lr: 3.0e-6
-  adjust_lr: none # not adjust lr according to total batch_size
-  max_epochs: 200
-  save_epochs: 50
-  validation_epochs: 200
-  sample_iterations: epoch  # epoch #30000      # how many iterations to perform sampling once ?
-  print_specific_things: True
-  #load_path: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/OUTPUT/audioset_train/2022-04-19T22-36-55/checkpoint
-  # config for ema
-  ema:
-    decay: 0.99
-    update_interval: 25
-    device: cpu
-
-  clip_grad_norm:
-    target: sound_synthesis.engine.clip_grad_norm.ClipGradNorm
-    params:
-      start_iteration: 0
-      end_iteration: 5000
-      max_norm: 0.5
-  optimizers_and_schedulers: # a list of configures, so we can config several optimizers and schedulers
-  - name: none # default is None
-    optimizer:
-      target: torch.optim.AdamW
-      params: 
-        betas: !!python/tuple [0.9, 0.96]
-        weight_decay: 4.5e-2
-            # target: ZeroRedundancyOptimizer
-            # optimizer_class: torch.optim.AdamW
-            # params:
-            # betas: !!python/tuple [0.9, 0.96]
-            # weight_decay: 4.5e-2
-    scheduler:
-      step_iteration: 1
-      target: sound_synthesis.engine.lr_scheduler.ReduceLROnPlateauWithWarmup
-      params:
-        factor: 0.5
-        patience: 25000
-        min_lr: 1.0e-6
-        threshold: 1.0e-1
-        threshold_mode: rel
-        warmup_lr: 4.5e-4 # the lr to be touched after warmup
-        warmup: 1000 
-
-dataloader:
-  # data_root: data
-  data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audioset
-  split_json: /apdcephfs/share_1316500/donchaoyang/data/vggsound/split_json
-  buffer_size: 4
-  batch_nums: 146
-  chunk_num_per_gpu: 4
-  batch_size: 16 #20
-  num_workers: 12
-  train_datasets: # a list of configures, so we can combine several schedulers
-    - target: sound_synthesis.data.audioset_dataset.AudiosetDatasetNPZ
-      params:
-        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audioset
-        phase: train
-        mel_num: 80
-        spec_len: 860
-        spec_crop_len: 848
-        random_crop: False
-        im_preprocessor_config:
-          target: sound_synthesis.data.utils.image_preprocessor.DalleTransformerPreprocessor   # ImageNet
-          params:
-            size: 256
-            phase: train
-  validation_datasets:
-    - target: sound_synthesis.data.audioset_dataset.AudiosetDatasetNPZ
-      params:
-        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audioset
-        phase: test
-        mel_num: 80
-        spec_len: 860
-        spec_crop_len: 848
-        random_crop: False
-        im_preprocessor_config:
-          target: sound_synthesis.data.utils.image_preprocessor.DalleTransformerPreprocessor
-          params:
-            size: 256
-            phase: val

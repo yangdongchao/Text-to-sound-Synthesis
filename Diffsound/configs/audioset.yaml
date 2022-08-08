@@ -7,13 +7,13 @@ model:
     content_codec_config: 
       target: sound_synthesis.modeling.codecs.spec_codec.vqgan.VQModel
       params:
-        ckpt_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-04-24T23-17-27_audioset_codebook256/checkpoints/last.ckpt' # e.g. '2021-06-06T19-42-53_vas_specs_vqgan' or '2021-05-19T22-16-54_vggsound_specs_vqgan'
-        embed_dim: 256
-        n_embed: 256 # codebook 的大小，若使用vggsound训练的codebook,则应该为1024
+        ckpt_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-04-24T23-17-27_audioset_codebook256/checkpoints/last.ckpt' # Set the codebook model path
+        embed_dim: 256 # The dimension of vector of codebook
+        n_embed: 256 # set the codebook size 
         ddconfig:
           double_z: false
           z_channels: 256
-          resolution: 848 # we need not to crop
+          resolution: 848 # 
           in_channels: 1
           out_ch: 1
           ch: 128
@@ -132,17 +132,17 @@ solver:
 
 dataloader:
   # data_root: data
-  data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audioset
-  split_json: /apdcephfs/share_1316500/donchaoyang/data/audioset/split_32gpu_no_json
+  data_root: /apdcephfs/share_1316500/donchaoyang/code3/Text-to-sound-Synthesis/Diffsound/data_root/audioset # set the data_root path
+  split_json: /apdcephfs/share_1316500/donchaoyang/data/audioset/split_32gpu_no_json # when you use fast loader, you should set the json path
   buffer_size: 8
   batch_nums: 166
   chunk_num_per_gpu: 8 # must be set
   batch_size: 20 #20
   num_workers: 8
-  train_datasets: # a list of configures, so we can combine several schedulers
+  train_datasets: # when you use fast loader, the following set is not needed.
     - target: sound_synthesis.data.audioset_dataset.AudiosetDatasetNPZ
       params:
-        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audioset
+        data_root: /apdcephfs/share_1316500/donchaoyang/code3/Text-to-sound-Synthesis/Diffsound/data_root/audioset
         phase: train
         mel_num: 80
         spec_len: 860
@@ -156,7 +156,7 @@ dataloader:
   validation_datasets:
     - target: sound_synthesis.data.audioset_dataset.AudiosetDatasetNPZ
       params:
-        data_root: /apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/data_root/audioset
+        data_root: /apdcephfs/share_1316500/donchaoyang/code3/Text-to-sound-Synthesis/Diffsound/data_root/audioset
         phase: test
         mel_num: 80
         spec_len: 860

@@ -188,7 +188,7 @@ class Diffsound():
     
 if __name__ == '__main__':
     # Note that cap_text.yaml includes the config of vagan, we must choose the right path for it.
-    config_path = 'DiffusionFast/OUTPUT/caps_train_audioset_pre/caps_text.yaml'
+    config_path = '/apdcephfs/share_1316500/donchaoyang/code3/Text-to-sound-Synthesis/Diffsound/evaluation/caps_text.yaml'
     #config_path = '/apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/OUTPUT/caps_train/2022-02-20T21-49-16/caps_text256.yaml'
     pretrained_model_path = 'DiffusionFast/OUTPUT/caps_train_vgg_pre/2022-05-18T01-00-38/checkpoint/000399e_76799iter.pth'
     save_root_ = 'DiffusionFast/OUTPUT/caps_train_vgg_pre/2022-05-18T01-00-38'
