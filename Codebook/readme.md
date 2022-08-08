@@ -4,12 +4,21 @@ The source code to train a VQ-VAE codebook. This part code is based on https://g
 conda env create -f conda_env.yml
 
 #### Data
-Please first download Audiocaps and Audioset datasets. <br/>
+Please first download Audiocaps and Audioset datasets. You can download Audiocaps dataset by https://audiocaps.github.io/ <br/> For Audioset dataset, please refer to https://github.com/qiuqiangkong/audioset_tagging_cnn, which provides a link to download. <br/>
 Then please using feature_extraction/extract_mel_spectrogram.py file to extract mel-spectrogram <br/>
 For the text features, we provide two types of features, (1) use BERT (2) use CLIP <br/>
-For BERT features, please run generete_text_fea/predict_one.py <br/>
-For CLIP features, please run generete_text_fea/generate_fea_clip.py <br/>
+For BERT features, please run 
+```
+python generete_text_fea/predict_one.py
+```
+For CLIP features, please run 
+```
+python generete_text_fea/generate_fea_clip.py 
+```
 
+#### Download pre-trained models
+Please first download the **lpaps** folder from google drive (https://drive.google.com/drive/folders/193It90mEBDPoyLghn4kFzkugbkF_aC8v?usp=sharing), and place it on Codebook/specvqgan/modules/autoencoder/ <br/>
+The 2022-04-24T23-17-27_audioset_codebook256 is our pre-trained codebook on audioset, and the size of codebook is 256. Other size of codebook will be upload on Baidu disk as soon as.
 #### Train codebook
 ```
 python3 /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/train.py --base /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/configs/audioset_codebook128.yaml -t True --gpus 0,1,2,3,4,5,6,7,
