@@ -26,7 +26,7 @@ python3 /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/train.py --base /ap
 You can use different config file from configs. audioset_codebook128 denotes that we train our codebook on audioset and the codebook size set as 128. <br/>
 
 #### Train AR model
-Firstly, please set the some key path in configs/caps_transformer.yaml, then run (Note that //apdcephfs/share_1316500/ is my machine path, you must replace with yours.)
+Firstly, please set the some key path in configs/caps_transformer.yaml, then run
 ```
 python3 Codebook/train.py --base Codebook/configs/caps_transformer.yaml -t True --gpus 0,1,2,3,4,5,6,7, \
 model.params.first_stage_config.params.ckpt_path=Codebook/logs/2022-04-24T23-17-27_audioset_codebook256/checkpoints/last.ckpt
