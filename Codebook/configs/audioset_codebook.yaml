@@ -37,7 +37,7 @@ lightning:
         vocoder_cfg:
           target: train.VocoderMelGan
           params:
-            ckpt_vocoder: '/apdcephfs/share_1316500/donchaoyang/code3/Codebook/vocoder_audioset/logs/audioset/'
+            ckpt_vocoder: 'Codebook/vocoder_audioset/logs/audioset/'
   trainer:
     sync_batchnorm: true
 
@@ -47,7 +47,7 @@ data:
     batch_size: 8
     num_workers: 12
 
-    spec_dir_path: '/apdcephfs/share_1316500/donchaoyang/data/audioset/features/*/melspec_10s_22050hz'
+    spec_dir_path: '/data/audioset/features/*/melspec_10s_22050hz'
     sample_rate: 22050
     mel_num: 80
     spec_len: 860
@@ -58,9 +58,9 @@ data:
       target: specvqgan.data.audioset.VASSpecsTrain
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audioset/txt/audioset_train.txt'
+          split_path: 'Codebook/data/audioset/txt/audioset_train.txt'
     validation:
       target: specvqgan.data.audioset.VASSpecsValidation
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audioset/txt/audioset_valid.txt'
+          split_path: 'Codebook/data/audioset/txt/audioset_valid.txt'

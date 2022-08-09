@@ -3,6 +3,7 @@ This is the open source code for our paper "Diffsound: discrete diffusion model 
 **2022/08/03** We upload the training code of VQ-VAE and the baseline method of text-to-sound generation (Autoregressive model), and the Diffsound code. Considering that the github has the limitation of file size, we will upload the pre-trained model on google drive disk. <br/>
 **2022/08/06** We uppoad the pre-trained model on google drive. please refer to https://drive.google.com/drive/folders/193It90mEBDPoyLghn4kFzkugbkF_aC8v?usp=sharing <br/>
 Note that a pre-trained diffsound model is very large, so that we only upload one audioset pretrained model now. More models we will try to upload on other free disk, if you known any free shared disk, please let me know, I will very appreciate.
+**2022/08/09** We upload trained diffsound model on audiocaps dataset, and the baseline AR model, and the codebook trained on audioset with the size of 512. You can refer to https://pan.baidu.com/s/1R9YYxECqa6Fj1t4qbdVvPQ . The password is **lsyr**. 
 More details will be updated as soon as.
 ## Overview
 ![avatar](fig/overview.png)

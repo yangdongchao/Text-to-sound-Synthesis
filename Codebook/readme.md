@@ -26,16 +26,16 @@ python3 /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/train.py --base /ap
 You can use different config file from configs. audioset_codebook128 denotes that we train our codebook on audioset and the codebook size set as 128. <br/>
 
 #### Train AR model
-Firstly, please set the some key path in configs/caps_transformer.yaml, then run
+Firstly, please set the some key path in configs/caps_transformer.yaml, then run (Note that //apdcephfs/share_1316500/ is my machine path, you must replace with yours.)
 ```
-python3 /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/train.py --base /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/configs/caps_transformer.yaml -t True --gpus 0,1,2,3,4,5,6,7, \
-model.params.first_stage_config.params.ckpt_path=/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-04-24T23-17-27_audioset_codebook256/checkpoints/last.ckpt
+python3 Codebook/train.py --base Codebook/configs/caps_transformer.yaml -t True --gpus 0,1,2,3,4,5,6,7, \
+model.params.first_stage_config.params.ckpt_path=Codebook/logs/2022-04-24T23-17-27_audioset_codebook256/checkpoints/last.ckpt
 ``` 
 #### Sampling
 ```
-EXPERIMENT_PATH="/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-05-05T19-28-48_caps_transformer"
-SPEC_DIR_PATH="/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/features/*/melspec_10s_22050hz/"
-cls_token_dir_path="/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/clip_text/*/cls_token_512/"
+EXPERIMENT_PATH="Codebook/logs/2022-05-05T19-28-48_caps_transformer"
+SPEC_DIR_PATH="Codebook/data/audiocaps/features/*/melspec_10s_22050hz/"
+cls_token_dir_path="Codebook/data/audiocaps/clip_text/*/cls_token_512/"
 SAMPLES_FOLDER="caps_validation"
 # SPLITS="\"[validation, ]\""
 SPLITS="[validation]"
@@ -52,8 +52,8 @@ python -m torch.distributed.launch \
     --master_addr=localhost \
     --master_port=62374 \
     --use_env \
-        /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/evaluation/generate_samples_caps.py \
-        sampler.config_sampler=/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/evaluation/configs/sampler.yaml \
+        Codebook/evaluation/generate_samples_caps.py \
+        sampler.config_sampler=Codebook/evaluation/configs/sampler.yaml \
         sampler.model_logdir=$EXPERIMENT_PATH \
         sampler.splits=$SPLITS \
         sampler.samples_per_video=$SAMPLES_PER_VIDEO \
@@ -64,8 +64,8 @@ python -m torch.distributed.launch \
         data.params.cls_token_dir_path=$cls_token_dir_path \
         sampler.now=$NOW
 
-python /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/evaluation/generate_samples_caps.py \
-        sampler.config_sampler=/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/evaluation/configs/sampler.yaml \
+python Codebook/evaluation/generate_samples_caps.py \
+        sampler.config_sampler=Codebook/evaluation/configs/sampler.yaml \
         sampler.model_logdir=$EXPERIMENT_PATH \
         sampler.splits=$SPLITS \
         sampler.samples_per_video=$SAMPLES_PER_VIDEO \
@@ -80,9 +80,9 @@ we provide two types of sample ways. The first is using multiple GPUs to samplin
 
 #### Evalutation
 ```
-ROOT='/apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/OUTPUT/caps_train/2022-05-08T19-56-36/fast_inf5_samples_2022-05-15T16-33-50'
-python /apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/evaluate.py \
-        config=/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/evaluation/configs/eval_melception_${DATASET,,}.yaml \
+ROOT='Codebook/OUTPUT/caps_train/2022-05-08T19-56-36/fast_inf5_samples_2022-05-15T16-33-50'
+python Codebook/evaluate.py \
+        config=Codebook/evaluation/configs/eval_melception_${DATASET,,}.yaml \
         input2.path_to_exp=$EXPERIMENT_PATH \
         patch.specs_dir=$SPEC_DIR_PATH \
         patch.spec_dir_path=$SPEC_DIR_PATH \

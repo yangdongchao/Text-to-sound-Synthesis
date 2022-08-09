@@ -4,7 +4,7 @@ model: # the parameter of model
   params:
     embed_dim: 256 # 每个embedding的维度
     n_embed: 2048 # 有多少个embedding previous 256
-    ckpt_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-03-22T12-06-24_audioset_codebook/checkpoints/last.ckpt'
+    ckpt_path: 'Codebook/logs/2022-03-22T12-06-24_audioset_codebook/checkpoints/last.ckpt'
     ddconfig:
       double_z: False
       z_channels: 256
@@ -38,7 +38,7 @@ lightning:
         vocoder_cfg:
           target: train.VocoderMelGan
           params:
-            ckpt_vocoder: '/apdcephfs/share_1316500/donchaoyang/code3/Codebook/vocoder_audioset/logs/audioset/'
+            ckpt_vocoder: 'Codebook/vocoder_audioset/logs/audioset/'
   trainer:
     sync_batchnorm: true
 
@@ -48,7 +48,7 @@ data:
     batch_size: 8
     num_workers: 12
 
-    spec_dir_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/features/*/melspec_10s_22050hz'
+    spec_dir_path: 'Codebook/data/audiocaps/features/*/melspec_10s_22050hz'
     sample_rate: 22050
     mel_num: 80
     spec_len: 860
@@ -59,9 +59,9 @@ data:
       target: specvqgan.data.caps.VASSpecsTrain
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/txt/caps_train.txt'
+          split_path: 'Codebook/data/audiocaps/txt/caps_train.txt'
     validation:
       target: specvqgan.data.caps.VASSpecsValidation
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/txt/caps_valid.txt'
+          split_path: 'Codebook/data/audiocaps/txt/caps_valid.txt'

@@ -27,7 +27,7 @@ model:
     first_stage_config:
       target: specvqgan.models.vqgan.VQModel
       params:
-        ckpt_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/logs/2022-04-22T19-35-05_audioset_codebook512' # e.g. '2021-06-06T19-42-53_vas_specs_vqgan' or '2021-05-19T22-16-54_vggsound_specs_vqgan'
+        ckpt_path: 'Codebook/logs/2022-04-22T19-35-05_audioset_codebook512' # e.g. '2021-06-06T19-42-53_vas_specs_vqgan' or '2021-05-19T22-16-54_vggsound_specs_vqgan'
         embed_dim: 256
         n_embed: 512 # 1024 for vggsound codebooks, 256 for caps codebooks
         ddconfig:
@@ -62,7 +62,7 @@ lightning:
         vocoder_cfg:
           target: train.VocoderMelGan
           params:
-            ckpt_vocoder: '/apdcephfs/share_1316500/donchaoyang/code3/Codebook/vocoder_audioset/logs/audioset/'
+            ckpt_vocoder: 'Codebook/vocoder_audioset/logs/audioset/'
     early_stop_callback:
       target: pytorch_lightning.callbacks.EarlyStopping
       params:
@@ -80,14 +80,14 @@ data:
     batch_size: 20
     num_workers: 8
 
-    spec_dir_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/features/*/melspec_10s_22050hz'
+    spec_dir_path: 'Codebook/data/audiocaps/features/*/melspec_10s_22050hz'
     sample_rate: 22050
     mel_num: 80
     spec_len: 860
     spec_crop_len: 848
     random_crop: False
 
-    cls_token_dir_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/clip_text/*/cls_token_512' # BNInception features
+    cls_token_dir_path: 'Codebook/data/audiocaps/clip_text/*/cls_token_512' # BNInception features
     # rgb_feats_dir_path: './data/vas/features/*/feature_resnet50_dim2048_21.5fps' # ResNet50 features
     feat_depth: 512 # 768 for bert,512 for clip
     feat_len: 1 # previous value is 215
@@ -102,13 +102,13 @@ data:
       target: specvqgan.data.caps.VASSpecsCondOnFeatsTrain
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/txt/caps_train.txt'
+          split_path: 'Codebook/data/audiocaps/txt/caps_train.txt'
         condition_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/txt/caps_train.txt'
+          split_path: 'Codebook/data/audiocaps/txt/caps_train.txt'
     validation:
       target: specvqgan.data.caps.VASSpecsCondOnFeatsValidation
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/txt/caps_valid.txt'
+          split_path: 'Codebook/data/audiocaps/txt/caps_valid.txt'
         condition_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/txt/caps_valid.txt'
+          split_path: 'Codebook/data/audiocaps/txt/caps_valid.txt'

@@ -15,7 +15,7 @@ import numpy as np
 import torchvision
 from PIL import Image
 import soundfile
-sys.path.insert(0,'/apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast')
+#sys.path.insert(0,'/apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast')
 from sound_synthesis.utils.io import load_yaml_config
 from sound_synthesis.modeling.build import build_model
 from sound_synthesis.data.build import build_dataloader
@@ -190,8 +190,8 @@ if __name__ == '__main__':
     # Note that cap_text.yaml includes the config of vagan, we must choose the right path for it.
     config_path = '/apdcephfs/share_1316500/donchaoyang/code3/Text-to-sound-Synthesis/Diffsound/evaluation/caps_text.yaml'
     #config_path = '/apdcephfs/share_1316500/donchaoyang/code3/VQ-Diffusion/OUTPUT/caps_train/2022-02-20T21-49-16/caps_text256.yaml'
-    pretrained_model_path = 'DiffusionFast/OUTPUT/caps_train_vgg_pre/2022-05-18T01-00-38/checkpoint/000399e_76799iter.pth'
-    save_root_ = 'DiffusionFast/OUTPUT/caps_train_vgg_pre/2022-05-18T01-00-38'
+    pretrained_model_path = '/apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast/OUTPUT/caps_train_audioset_pre/2022-05-13T00-35-51/checkpoint/000299e_115199iter.pth'
+    save_root_ = '/apdcephfs/share_1316500/donchaoyang/code3/DiffusionFast/OUTPUT/caps_train_vgg_pre/2022-05-18T01-00-38'
     random_seconds_shift = datetime.timedelta(seconds=np.random.randint(60))
     key_words = 'Real_vgg_pre_399'
     now = (datetime.datetime.now() - random_seconds_shift).strftime('%Y-%m-%dT%H-%M-%S')

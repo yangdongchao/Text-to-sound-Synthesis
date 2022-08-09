@@ -38,7 +38,7 @@ lightning:
         vocoder_cfg:
           target: train.VocoderMelGan
           params:
-            ckpt_vocoder: '/apdcephfs/share_1316500/donchaoyang/code3/Codebook/vocoder_audioset/logs/audioset/'
+            ckpt_vocoder: 'Codebook/vocoder_audioset/logs/audioset/'
   trainer:
     sync_batchnorm: true
 
@@ -59,9 +59,9 @@ data:
       target: specvqgan.data.audioset.VASSpecsTrain
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audioset/txt/audioset_train.txt'
+          split_path: 'Codebook/data/audioset/txt/audioset_train.txt'
     validation:
       target: specvqgan.data.audioset.VASSpecsValidation
       params:
         specs_dataset_cfg:
-          split_path: '/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audioset/txt/audioset_valid.txt'
+          split_path: 'Codebook/data/audioset/txt/audioset_valid.txt'

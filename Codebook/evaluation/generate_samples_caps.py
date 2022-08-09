@@ -8,7 +8,7 @@ from tqdm import tqdm
 import soundfile
 import yaml
 sys.path.insert(0, '.')  # nopep8
-sys.path.insert(0,'/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN')
+#sys.path.insert(0,'/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN')
 from pathlib import Path
 from vocoder.modules import Generator
 import torch
@@ -53,7 +53,7 @@ def load_and_save_config():
                 elif 'vas.VAS' in cfg.data.params.train.target:
                     cfg.data.params[a] = os.path.join('./data/vas/features/*', Path(cfg.data.params[a]).name)
                 elif 'caps.VAS' in cfg.data.params.train.target:
-                    cfg.data.params[a] = os.path.join('/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/data/audiocaps/features/*', Path(cfg.data.params[a]).name)
+                    cfg.data.params[a] = os.path.join('Codebook/data/audiocaps/features/*', Path(cfg.data.params[a]).name)
 
 
     # save the config
