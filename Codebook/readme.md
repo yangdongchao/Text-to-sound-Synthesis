@@ -17,7 +17,7 @@ python generete_text_fea/generate_fea_clip.py
 ```
 
 #### Download pre-trained models
-Please first download the **lpaps** folder from google drive (https://drive.google.com/drive/folders/193It90mEBDPoyLghn4kFzkugbkF_aC8v?usp=sharing), and place it on Codebook/specvqgan/modules/autoencoder/ <br/> Furthermore, please down logs folder, and put it to Codebook/evaluation/logs
+Please first download the **lpaps** folder from google drive (https://drive.google.com/drive/folders/193It90mEBDPoyLghn4kFzkugbkF_aC8v?usp=sharing), and place it on Codebook/specvqgan/modules/autoencoder/ <br/> Furthermore, please down **logs** folder, and put it to Codebook/evaluation/logs
 The 2022-04-24T23-17-27_audioset_codebook256 is our pre-trained codebook on audioset, and the size of codebook is 256. Other size of codebook will be upload on Baidu disk as soon as.
 #### Train codebook
 ```
