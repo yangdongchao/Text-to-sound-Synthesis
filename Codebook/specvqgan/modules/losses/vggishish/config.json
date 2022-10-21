@@ -1,12 +1,1 @@
-{
-    "Token":"IWJyNYOzrXSLavEQUPGUgA",
-    "business_flag": "TEG_AILAB_TRC_CGC_INTERN",
-    "model_local_file_path": "/apdcephfs/share_1316500/donchaoyang/code3/SpecVQGAN/specvqgan/modules/losses/vggishish",
-    "GPUName": "M40",
-    "task_flag": "train_melception_mul_5",
-    "host_num": 1,
-    "host_gpu_num": 4,
-    "cuda_version": "10.2",
-    "image_full_name": "mirrors.tencent.com/donchaoyang/tts:diffusion2",
-    "is_elasticity": false
-}
+
