@@ -6,7 +6,7 @@ The demo page is http://dongchaoyang.top/text-to-sound-synthesis-demo/ <br/>
 **2022/08/06** We uppoad the pre-trained model on google drive. please refer to https://drive.google.com/drive/folders/193It90mEBDPoyLghn4kFzkugbkF_aC8v?usp=sharing <br/>
 Note that a pre-trained diffsound model is very large, so that we only upload one audioset pretrained model now. More models we will try to upload on other free disk, if you known any free shared disk, please let me know, I will very appreciate. <br/>
 **2022/08/09** We upload trained diffsound model on audiocaps dataset, and the baseline AR model, and the codebook trained on audioset with the size of 512. You can refer to https://pan.baidu.com/s/1R9YYxECqa6Fj1t4qbdVvPQ . The password is **lsyr** <br/>
-If you can not open the Baidu disk, please try to refer to PKU disk https://disk.pku.edu.cn:443/link/DA2EAC5BBBF43C9CAB37E0872E50A0E4 <br/>
+**2022/12/06** Hi, everyone. In our previous setting, we use the wrong sample rate to load wav file, which results in the speech cannot be generated very well. Now, we update the feature extraction module. https://github.com/yangdongchao/Text-to-sound-Synthesis/blob/master/Codebook/feature_extraction/extract_mel_spectrogram.py#L167 . We will re-train our model, all of the pre-trained model can be found on PKU disk: https://disk.pku.edu.cn:443/link/4908743A441B02235C8652742FE44949
 More details will be updated as soon as.
 ## Overview
 ![avatar](fig/overview.png)
