@@ -164,7 +164,7 @@ def inv_transforms(x, folder_name='melspec_10s_22050hz'):
 
 
 def get_spectrogram(audio_path, save_dir, length, folder_name='melspec_10s_22050hz', save_results=True):
-    wav, _ = librosa.load(audio_path, sr=None)
+    wav, _ = librosa.load(audio_path, sr=22050) # setting the same sample rate with MelSpectrogram function, if you donot downsample the wav file in advance.
     # this cannot be a transform without creating a huge overhead with inserting audio_name in each
     y = np.zeros(length)
     if wav.shape[0] < length:
