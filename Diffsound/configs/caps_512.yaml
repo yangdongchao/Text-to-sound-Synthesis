@@ -79,7 +79,7 @@ model:
         content_emb_config:
           target: sound_synthesis.modeling.embeddings.dalle_mask_image_embedding.DalleMaskImageEmbedding
           params:
-            num_embed: 512    #should be quantize_number
+            num_embed: 513    #should be quantize_number
             spatial_size: !!python/tuple [5, 53]
             embed_dim: 1024 # the dim of postion embedding
             trainable: True
