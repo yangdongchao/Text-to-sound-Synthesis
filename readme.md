@@ -11,6 +11,7 @@ More details will be updated as soon as.
 **2023/01/11** The latest pre-trained model on audioset have been released, please refer to PKU disk: https://disk.pku.edu.cn:443/link/E36C91C27830FAF0B9326D8EA685A193
 有效期限：2024-06-30 23:59
 ## Overview
+Hi, I have upload all of the pre-trained models on huggingface: https://huggingface.co/Dongchao/Diffsound/tree/main
 ![avatar](fig/overview.png)
 
 ## Pretrained Model
