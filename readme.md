@@ -1,4 +1,6 @@
 # Text-to-sound Generation
+This paper has been accepted by IEEE Transactions on Audio, Speech and Language Processing. <br/>
+I have upload all of the pre-trained models on huggingface: https://huggingface.co/Dongchao/Diffsound/tree/main <br/>
 This is the open source code for our paper "Diffsound: discrete diffusion model for text-to-sound generateion". <br/>
 You can find the paper on arxiv https://arxiv.org/pdf/2207.09983v1.pdf <br/>
 The demo page is http://dongchaoyang.top/text-to-sound-synthesis-demo/ <br/>
@@ -11,7 +13,6 @@ More details will be updated as soon as.
 **2023/01/11** The latest pre-trained model on audioset have been released, please refer to PKU disk: https://disk.pku.edu.cn:443/link/E36C91C27830FAF0B9326D8EA685A193
 有效期限：2024-06-30 23:59
 ## Overview
-Hi, I have upload all of the pre-trained models on huggingface: https://huggingface.co/Dongchao/Diffsound/tree/main
 ![avatar](fig/overview.png)
 
 ## Pretrained Model
