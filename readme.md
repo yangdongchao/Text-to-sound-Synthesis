@@ -38,3 +38,6 @@ https://github.com/v-iashin/SpecVQGAN
   pages={arXiv--2207},
   year={2022}
 }
+
+## License
+MIT license
